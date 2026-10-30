@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-10-29T22:51:21",
+  "mcp_server": {
+    "name": "campus-customs",
+    "config_file": ".mcp.json",
+    "command": ".venv/Scripts/python.exe",
+    "args": [
+      "mcp_server/server.py"
+    ],
+    "tools_listed": [
+      "check_stock",
+      "get_lease",
+      "check_margin",
+      "get_today",
+      "list_tickets",
+      "get_ticket",
+      "update_ticket",
+      "get_cash",
+      "list_inventory",
+      "inventory_health_check",
+      "check_shortfall",
+      "reserve_stock",
+      "list_vendors",
+      "vendor_status",
+      "find_restock_vendor",
+      "list_invoices",
+      "list_payments",
+      "books_tie_out",
+      "record_price_decision",
+      "request_invoice_payment",
+      "request_purchase_order",
+      "list_approvals",
+      "list_leases",
+      "request_rent_payment",
+      "draft_customer_message",
+      "list_drafts",
+      "list_sales",
+      "list_purchase_orders",
+      "record_sale",
+      "receive_purchase_order",
+      "approve_and_pay",
+      "reject_request",
+      "reset_database"
+    ]
+  },
+  "database": "data/campus_customs_new.db",
+  "all_match_database": true,
+  "tests": [
+    {
+      "ticket": 101,
+      "prompt_to_vibe_coder": "Using the campus-customs MCP server, call check_stock for SKU CC-TEE-WHITE in size S (ticket 101: Tauhid Zaman wants 1 Bulldog tee in size S). How many are on hand?",
+      "tool_name": "check_stock",
+      "arguments": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S"
+      },
+      "is_error": false,
+      "tool_output": [
+        {
+          "sku": "CC-TEE-WHITE",
+          "name": "Classic Bulldog Tee",
+          "size": "S",
+          "qty": 0,
+          "location": "Aisle B"
+        }
+      ],
+      "db_cross_check": {
+        "db_query": "SELECT sku, name, size, qty, location FROM inventory WHERE sku='CC-TEE-WHITE' AND size='S'",
+        "db_rows": [
+          {
+            "sku": "CC-TEE-WHITE",
+            "name": "Classic Bulldog Tee",
+            "size": "S",
+            "qty": 0,
+            "location": "Aisle B"
+          }
+        ],
+        "matches": true
+      }
+    },
+    {
+      "ticket": 102,
+      "prompt_to_vibe_coder": "Using the campus-customs MCP server, call get_lease for lease 1 (ticket 102: Elm City Properties says rent is due in 2 days). What is the rent and when is it due?",
+      "tool_name": "get_lease",
+      "arguments": {
+        "lease_id": 1
+      },
+      "is_error": false,
+      "tool_output": {
+        "id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400.0,
+        "next_due": "2026-10-02",
+        "notes": "Paid 2026-09-02 rent $2,400.00 on 2026-08-31 (approved by Ryan)",
+        "today": "2026-08-31",
+        "days_until_due": 32,
+        "overdue": false
+      },
+      "db_cross_check": {
+        "db_query": "SELECT * FROM leases WHERE id=1; SELECT date_today FROM desk",
+        "db_rows": {
+          "lease": {
+            "id": 1,
+            "space_name": "Chapel Street shop",
+            "landlord": "Elm City Properties",
+            "monthly_rent": 2400.0,
+            "next_due": "2026-10-02",
+            "notes": "Paid 2026-09-02 rent $2,400.00 on 2026-08-31 (approved by Ryan)"
+          },
+          "desk.date_today": "2026-08-31",
+          "days_until_due (computed)": 32
+        },
+        "matches": true
+      }
+    },
+    {
+      "ticket": 103,
+      "prompt_to_vibe_coder": "Using the campus-customs MCP server, call check_margin for 20 x CC-HOOD-NAVY at $45 each (ticket 103: Yale AI Club wants a bulk discount). What is the discount and margin?",
+      "tool_name": "check_margin",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "unit_price": 45,
+        "qty": 20
+      },
+      "is_error": false,
+      "tool_output": {
+        "sku": "CC-HOOD-NAVY",
+        "unit_cost": 22.0,
+        "list_price": 58.0,
+        "unit_price": 45.0,
+        "qty": 20,
+        "discount_pct": 22.4,
+        "unit_margin": 23.0,
+        "margin_pct": 51.1,
+        "order_revenue": 900.0,
+        "order_gross_profit": 460.0,
+        "list_margin_pct": 62.1,
+        "below_cost": false
+      },
+      "db_cross_check": {
+        "db_query": "SELECT sku, unit_cost, list_price FROM pricing WHERE sku='CC-HOOD-NAVY'",
+        "db_rows": {
+          "sku": "CC-HOOD-NAVY",
+          "unit_cost": 22.0,
+          "list_price": 58.0
+        },
+        "matches": true
+      }
+    }
+  ]
+}

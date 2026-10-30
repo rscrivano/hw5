@@ -1,0 +1,20 @@
+# secrets: never commit (copy .env.example to .env locally)
+.env
+*.env.local
+
+# local environments and build output
+.venv/
+node_modules/
+frontend/node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+
+# scratch / temp files (both databases in data/ ARE committed on purpose)
+data/*.tmp
+data/*.db-journal
+output/*.tmp
+output/*.corrupt-*.json
+
+# first-attempt code kept only on the author's machine
+_archive/
