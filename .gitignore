@@ -18,3 +18,8 @@ output/*.corrupt-*.json
 
 # first-attempt code kept only on the author's machine
 _archive/
+
+# submission zip (built from git; not part of the repo)
+*.zip
+# full Claude session transcript: included in the Canvas zip only, not published
+output/claude_session_transcript.md

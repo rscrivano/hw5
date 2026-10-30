@@ -305,3 +305,11 @@ Result: Claude added an "Owner's note" to `output/harness.md` naming full accrua
 > This is the expected file layout in the image attached. (hw5/ with AI_prompts.md, requirements.txt, .env.example, .gitignore, .mcp.json, README.md, data/ (both DBs), mcp_server/ (server.py, README.md), frontend/, backend/ (main.py, models.py, prompts/ with the five agent prompts), output/ (harness.md, mcp_smoke.json, desk_tickets.html, design.md, resolved_tickets.json, resolved_board.html, audit_trail.json, github_url.txt))
 >
 > README should explain: copy original DB to the working copy when I need a clean run, start MCP server, start FastAPI backend, start the react board, reset the DB before a full three-ticket run
+
+Result: public repo https://github.com/rscrivano/hw5 created and pushed (verified with a fresh clone: full layout, both DBs, no .env). The Canvas login needed the user, so Claude asked how to submit.
+
+### Prompt 2.20: Submission zip
+
+> can you put everything into a zip folder that is tied to this assignment so i can submit it on canvas? Include all the files in the zip that are part of this assignment development including the copy of the prompts here in Claude
+
+Result: Claude built `hw5_submission.zip` (same files as the GitHub repo, plus a full export of this Claude Code session in `output/claude_session_transcript.md`, which is in the zip only and not on public GitHub).
